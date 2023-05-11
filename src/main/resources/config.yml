@@ -1,0 +1,9 @@
+guild:
+  #
+  # The Webhook URL to use for sending plugin updates to a Discord server.
+  #
+  webhook: ''
+  #
+  # The role ID that should be used for mentioning.
+  #
+  role: ''

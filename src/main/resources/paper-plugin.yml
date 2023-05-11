@@ -1,0 +1,17 @@
+name: PowerPlugins
+author: Andre_601
+version: ${project.version}
+
+main: net.powerplugins.plugin.PowerPlugins
+loader: net.powerplugins.plugin.PreLoader
+
+api-version: 1.19
+
+dependencies:
+  - name: PlaceholderAPI
+    required: false
+    bootstrap: false
+
+load-after:
+  - name: PlaceholderAPI
+    bootstrap: false
