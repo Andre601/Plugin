@@ -106,14 +106,14 @@ public class PowerPlugins extends JavaPlugin{
                 continue;
             }
             
-            if(!pluginFile.isNew() && !pluginFile.wasUpdated(plugin.getPluginMeta().getVersion()))
+            if(!pluginFile.wasUpdated(plugin.getPluginMeta().getVersion()))
                 continue;
             
             // Plugin is not new but has been updated, so we have to update the file too.
-            if(!pluginFile.isNew()) 
+            if(!pluginFile.isNew())
                 pluginFile = pluginFileManager.updateFile(pluginFile, plugin);
             
-            // updateFile(PluginFile, Plugin) may return a null value.
+            // updateFile may return null.
             if(pluginFile == null)
                 continue;
             

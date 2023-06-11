@@ -5,7 +5,6 @@ import net.powerplugins.plugin.serializers.PluginFileSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.configurate.ConfigurationNode;
-import org.spongepowered.configurate.serialize.SerializationException;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
 import javax.annotation.Nullable;
@@ -73,7 +72,7 @@ public class PluginFileManager{
     }
     
     public PluginFile updateFile(PluginFile pluginFile, Plugin plugin){
-        File file = new File(pluginsFolder, plugin.getName() + ".yml");
+        File file = new File(pluginsFolder, plugin.getName().toLowerCase(Locale.ROOT) + ".yml");
         
         YamlConfigurationLoader loader = getLoader(file);
         try{
@@ -90,7 +89,7 @@ public class PluginFileManager{
             
             plugins.put(plugin.getName().toLowerCase(Locale.ROOT), newPluginFile);
             
-            return pluginFile;
+            return newPluginFile;
         }catch(IOException ex){
             logger.warning("Encountered IOException while updating a plugin YAML file.");
             logger.warning("Cause: " + ex.getMessage());
@@ -103,7 +102,7 @@ public class PluginFileManager{
         if(plugin == null)
             return null;
         
-        File file = new File(pluginsFolder, plugin.getName() + ".yml");
+        File file = new File(pluginsFolder, plugin.getName().toLowerCase(Locale.ROOT) + ".yml");
         YamlConfigurationLoader loader = getLoader(file);
         
         try{
@@ -138,28 +137,8 @@ public class PluginFileManager{
         }
     }
     
-    private ConfigurationNode getNode(File file){
-        YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
-            .defaultOptions(opt -> opt.serializers(builder -> builder.register(PluginFile.class, PluginFileSerializer.INSTANCE)))
-            .file(file)
-            .build();
-        
-        try{
-            return loader.load();
-        }catch(IOException ex){
-            logger.warning("Encountered IOException while loading PluginFile.");
-            logger.warning("Cause: " + ex.getMessage());
-            
-            return null;
-        }
-    }
-    
     public PluginFile getPlugin(String name){
-        logger.info("Received name: " + name);
-        
         PluginFile pluginFile = plugins.get(name.toLowerCase(Locale.ROOT));
-        
-        logger.info("PluginFile null? " + (pluginFile == null));
         
         if(pluginFile == null)
             return createPluginFile(Bukkit.getPluginManager().getPlugin(name));

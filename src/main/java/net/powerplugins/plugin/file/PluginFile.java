@@ -25,7 +25,7 @@ public record PluginFile(String name, List<String> authors, String version, List
     }
     
     public boolean wasUpdated(String newVersion){
-        return !version().equalsIgnoreCase(newVersion);
+        return isNew() || !version().equalsIgnoreCase(newVersion);
     }
     
     public static class Builder{

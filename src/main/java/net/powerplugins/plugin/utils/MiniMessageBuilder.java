@@ -24,7 +24,7 @@ public class MiniMessageBuilder{
     public MiniMessageBuilder append(String text, String hover, String action){
         return append(
             "<hover:show_text:\"" + hover + "\">" +
-            "<click:" + (action.startsWith("/") ? "run_command" : "open_url") + ":" + action + ">" +
+            "<click:" + (action.startsWith("/") ? "run_command" : "open_url") + ":\"" + action + "\">" +
             text +
             "</click>" +
             "</hover>"

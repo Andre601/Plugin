@@ -56,7 +56,7 @@ public class CommandListener implements Listener{
         if(split.length == 1)
             return;
         
-        List<String> suggestions = plugin.getServer().getCommandMap().tabComplete(event.getSender(), "/powerplugins:plugins " + split[1]);
+        List<String> suggestions = plugin.getServer().getCommandMap().tabComplete(event.getSender(), "powerplugins:plugins " + split[1]);
         if(suggestions == null)
             return;
         

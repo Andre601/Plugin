@@ -178,7 +178,8 @@ public class CmdPlugins extends Command implements TabCompleter{
                 }
             }
             
-            builder.append(getPrevButton(category, currentPage))
+            builder.newline()
+                .append(getPrevButton(category, currentPage))
                 .append(getFooter(currentPage))
                 .append(getNextButton(category, currentPage, totalPages));
             
@@ -272,6 +273,11 @@ public class CmdPlugins extends Command implements TabCompleter{
                 "<grey>Click to open Link.",
                 pluginFile.url()
             ).newline()
+            .append("<grey>")
+            .append("Description:")
+            .newline()
+            .append(pluginFile.description(), "white")
+            .newline()
             .append(
                 MiniMessageBuilder.get()
                     .append("<grey>")
@@ -355,7 +361,7 @@ public class CmdPlugins extends Command implements TabCompleter{
                     "/plugins " + category.getName() + " " + (page + 1)
                 );
         }else{
-            return MiniMessageBuilder.get().append("[>]");
+            return MiniMessageBuilder.get().append("[>]", "grey");
         }
     }
     
